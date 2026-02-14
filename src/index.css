@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+body {
+    background-color: #0e1114;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+span {
+    color: #de2828;
+}
