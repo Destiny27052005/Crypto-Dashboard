@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import { TailSpin } from 'react-loader-spinner'
 import Header from "./components/Header"
 import Card from "./components/Cards"
 
 function App() {
-  const [cryptoData, setCryptoData] = useState([])
-  const [isPage, setIsPage] = useState(10)
-  // const pages = 10;
+  const [cryptoData, setCryptoData] = useState([]);
+  const [isPage, setIsPage] = useState(10);
+  const [isOrder, setIsOrder] = useState('market_cap_desc');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
   useEffect(() => {
     const fetchCryptoData = async () => {
       try {
@@ -17,7 +22,7 @@ function App() {
           },
           params: {
             vs_currency: 'usd',
-            order: 'market_cap_desc',
+            order: isOrder,
             per_page: isPage,
             page: 1,
             sparkline: false
@@ -25,28 +30,44 @@ function App() {
         });
 
         setCryptoData(response.data);
-      } catch (error) {
-        if (error.response) {
-          console.error('API Error:', error.response.status, error.response.data);
-        } else {
-          console.error('Request Error:', error.message);
-        }
+      } catch (err) {
+        setError(err.message);
+      }
+      finally {
+        setLoading(false);
       }
     };
     fetchCryptoData()
-  }, [cryptoData, isPage])
+  }, [cryptoData, isPage, isOrder])
 
 
 
   return (
     <>
-      <Header onChange={(e) => setIsPage(e.target.value)} />
-      <div className="cards max-w-6xl mx-auto  p-4">
+      <Header onChange={(e) => setIsPage(e.target.value)} onchange={(e) => setIsOrder(e.target.value)} />
+      <div className="spinner">
+        {loading &&
+          <TailSpin
+            height="40"
+            width="40"
+            color="#4fa94d"
+            ariaLabel="tail-spin-loading"
+            visible={loading}
+          />}
+        {error && (
+          <div className='error'>
+            <p className="text-white">❌ {error}</p>
+          </div>
+        )}
+      </div>
+      {!loading && !error && (
+      <main className="cards max-w-6xl mx-auto  p-4">
         {cryptoData.map(coin => (
           <Card key={coin.id} coin={coin} />
         )
         )}
-      </div>
+      </main>
+      )}
     </>
   )
 }

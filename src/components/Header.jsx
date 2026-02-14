@@ -1,16 +1,24 @@
 
 
-function Header({onChange}) {
-    return ( 
-        <div className="flex m-3 justify-between">
-            <h1 className="text-xl text-white md:text-3xl font-bold">Crypto Dashboard</h1>
-            <select name="page" className="text-white border-gray-300 border rounded" id="select" onChange={onChange} >
-                <option className="text-white bg-blue-950" value="10">10</option>
-                <option className="text-white bg-blue-950" value="50">50</option>
-                <option className="text-white bg-blue-950" value="100">100</option>
-            </select>
+function Header({ onChange, onchange }) {
+    return (
+        <div className="m-3 ">
+            <h1 className="text-xl mb-3 text-white md:text-3xl font-bold">Crypto Dashboard</h1>
+            <div className="flex justify-between">
+                <select name="page" className="text-white border-gray-300 border rounded" id="select" onChange={onChange} >
+                    <option className="text-white bg-blue-950" value="10">10</option>
+                    <option className="text-white bg-blue-950" value="50">50</option>
+                    <option className="text-white bg-blue-950" value="100">100</option>
+                </select>
+                <select name="order" className="text-white text-sm border-gray-300 border rounded" id="order" onChange={onchange}>
+                    <option className="text-white bg-blue-950" value="market_cap_desc">Market Cap Desc.</option>
+                    <option className="text-white bg-blue-950" value="market_cap_asc">Market Cap Asc.</option>
+                    <option className="text-white bg-blue-950" value="volume_desc">Volume Desc.</option>
+                    <option className="text-white bg-blue-950" value="volume_asc">Volume Asc.</option>
+                </select>
+            </div>
         </div>
-     );
+    );
 }
 
 export default Header;

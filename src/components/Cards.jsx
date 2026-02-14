@@ -6,7 +6,7 @@ function Card({ coin }) {
 
         <div key={coin.id} className="coin_card bg-[#15181f] rounded-4xl border border-gray-600 p-4 transition hover:border-blue-400">
             <div className="flex justify-between place-items-center">
-                <div className="flex gap-2">
+                <div className="flex place-items-center gap-2">
                     <img src={coin.image} alt={coin.name} className="w-12 h-12" />
                     <div>
                         <h1 className="text-white text-xl font-bold">{coin.name}</h1>
