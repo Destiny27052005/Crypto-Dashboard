@@ -3,6 +3,7 @@ import axios from "axios"
 import { Routes, Route } from "react-router-dom"
 import HomePage from "./Pages/HomePage"
 import NotFound from "./Pages/NotFound"
+import CoinDetails from "./Pages/CoinDetails"
 
 function App() {
   const [cryptoData, setCryptoData] = useState([]);
@@ -52,6 +53,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<HomePage filter={filter} setFilter={setFilter} loading={loading} error={error} filteredCoins={filteredCoins} setIsPage={setIsPage} setIsOrder={setIsOrder} />} />
+        <Route path='/coin/:id' element={<CoinDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
