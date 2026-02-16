@@ -14,7 +14,7 @@ function Card({ coin }) {
                     </div>
                 </div>
                 <div className="rounded p-0.5" style={coin.price_change_percentage_24h >= 0 ? { backgroundColor: '#173027' } : { backgroundColor: '#361e24' }}>
-                    <p className="z-10" style={coin.price_change_percentage_24h >= 0 ? { color: '#49de80' } : { color: '#de2828' }}>{coin.price_change_percentage_24h >= 0 ? <HiArrowTrendingUp className="inline mr-1" /> : <FaArrowTrendDown className="inline mr-1" />}{coin.price_change_percentage_24h?.toFixed(2)}%</p>
+                    <p className="z-10" style={coin.price_change_percentage_24h >= 0 ? { color: '#49de80' } : { color: '#de2828' }}>{coin.price_change_percentage_24h >= 0 ? <HiArrowTrendingUp className="inline mr-1" /> : <FaArrowTrendDown className="inline mr-1" />}{coin.price_change_percentage_24h?.toFixed(2) == null ? '0.00' : coin.price_change_percentage_24h?.toFixed(2)}%</p>
                 </div>
             </div>
             <h2 className="text-white text-2xl font-bold my-2.5">${coin.current_price.toLocaleString()}</h2>

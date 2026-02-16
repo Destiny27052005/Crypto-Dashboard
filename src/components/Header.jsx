@@ -7,7 +7,7 @@ function Header({ onChange, onchange, filter, onFilterChange }) {
             <h1 className="text-xl mb-3 text-white md:text-3xl font-bold">Crypto Dashboard</h1>
             <div className="flex gap-1 md:gap-3 w-full justify-between">
                 <FilterInput filter={filter} onFilterChange={onFilterChange} />
-                <div>
+                <div className="flex gap-1 md:gap-3">
                     <select name="page" className="text-white border-gray-300 border rounded" id="select" onChange={onChange} >
                         <option className="text-white bg-blue-950" value="10">10</option>
                         <option className="text-white bg-blue-950" value="50">50</option>
