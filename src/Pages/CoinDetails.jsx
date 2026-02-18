@@ -60,7 +60,7 @@ function CoinDetails() {
                                 </div>
                                 <div className="flex place-items-center gap-2">
                                     <h2 className="text-4xl font-semibold text-white">${coin.market_data.current_price?.usd?.toLocaleString() || "N/A"}</h2>
-                                    <p className={`${coin.market_data.price_change_percentage_24h?.toFixed(2) >= 0 ? "text-green-500" : "text-red-500"} flex place-items-center gap-1 bg-[#30181c] px-1 py-0.5 rounded-sm`}>{coin.market_data.price_change_percentage_24h.toFixed(2) >= 0 ? <HiArrowTrendingUp className="text-green-500" /> : <FaArrowTrendDown className="text-red-500" />}{coin.market_data.price_change_percentage_24h?.toFixed(2) || "N/A"}%</p>
+                                    <p className={`${coin.market_data.price_change_percentage_24h?.toFixed(2) >= 0 ? "text-green-500" : "text-red-500"} ${coin.market_data.price_change_percentage_24h?.toFixed(2) >= 0 ? "bg-green-900/30" : "bg-red-900/30"} flex place-items-center gap-1 px-1 py-0.5 rounded-sm`}>{coin.market_data.price_change_percentage_24h.toFixed(2) >= 0 ? <HiArrowTrendingUp className="text-green-500" /> : <FaArrowTrendDown className="text-red-500" />}{coin.market_data.price_change_percentage_24h?.toFixed(2) || "N/A"}%</p>
                                 </div>
                             </div>
                         </div>
