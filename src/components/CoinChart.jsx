@@ -87,6 +87,10 @@ function CoinChart({ coinId }) {
         scales: {
             x: {
                 type: 'time',
+                time: {
+                    unit: days === 1 ? 'hour' : 'day', // Show hours for 24h, days for longer periods
+                    tooltipFormat: 'MMM d, yyyy h:mm a', // Tooltip date format
+                },
                 grid: {
                     color: 'rgba(255, 255, 255, 0.05)',
                     display: true, // Hide vertical grid lines for a cleaner look
@@ -113,15 +117,18 @@ function CoinChart({ coinId }) {
     return (
         <div className="p-6 rounded-xl border border-gray-800" style={{ height: 'fit-content' }}>
             <div className="flex justify-between place-content-center mb-4">
-                <p className="text-gray-400 text-2xl font-medium">Price Chart</p>
+                <p className="text-gray-400 text-[16px] md:text-2xl font-medium">Price Chart</p>
                 <div className="flex gap-2 mb-4">
-                    {[7, 24, 30, 365].map(d => (
+                    {[{ label: '24h', value: 1 },
+                    { label: '7d', value: 7 },
+                    { label: '30d', value: 30 },
+                    { label: '1y', value: 365 }].map(btn => (
                         <button
-                            key={d}
-                            onClick={() => setDays(d)}
-                            className={`px-3 cursor-pointer py-1 rounded text-xs font-bold transition ${days === d ? 'bg-[#1f8fff] text-[#0d1217]' : ' text-white hover:bg-gray-700'}`}
+                            key={btn.value}
+                            onClick={() => setDays(btn.value)}
+                            className={`px-3 cursor-pointer py-1 rounded text-xs font-bold transition ${days === btn.value ? 'bg-[#1f8fff] text-[#0d1217]' : ' text-white hover:bg-gray-700'}`}
                         >
-                            {d === 365 ? '1 Year' : `${d} Days`}
+                            {btn.label}
                         </button>
                     ))}
                 </div>
