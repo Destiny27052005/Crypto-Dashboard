@@ -119,7 +119,7 @@ function CoinChart({ coinId }) {
                         <button
                             key={d}
                             onClick={() => setDays(d)}
-                            className={`px-3 py-1 rounded text-xs font-bold transition ${days === d ? 'bg-[#1f8fff] text-[#0d1217]' : ' text-white hover:bg-gray-700'}`}
+                            className={`px-3 cursor-pointer py-1 rounded text-xs font-bold transition ${days === d ? 'bg-[#1f8fff] text-[#0d1217]' : ' text-white hover:bg-gray-700'}`}
                         >
                             {d === 365 ? '1 Year' : `${d} Days`}
                         </button>
