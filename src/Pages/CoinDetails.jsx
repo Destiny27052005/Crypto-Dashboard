@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { TailSpin } from 'react-loader-spinner'
 import { FaArrowTrendDown } from "react-icons/fa6";
 import { HiArrowTrendingUp } from "react-icons/hi2";
+import { FaArrowLeft } from "react-icons/fa6";
 import Detail from "../components/Detail";
+import CoinChart from "../components/CoinChart";
 
 
 
@@ -36,7 +38,7 @@ function CoinDetails() {
     return (
         <>
             <div className="max-w-6xl m-auto p-4">
-                <Link to="/" className="text-gray-300">Back</Link>
+                <Link to="/" className="text-gray-300 flex place-items-center gap-2"><FaArrowLeft className="text-gray-300" />Back</Link>
                 {loading &&
                     <TailSpin
                         height="40"
@@ -48,22 +50,22 @@ function CoinDetails() {
                 {error && <p className="text-red-500">Error: {error}</p>}
                 {coin && (
                     <div className="mt-4">
-                        <div className="flex place-items-center gap-4 mb-4">
+                        <div className="flex place-items-center gap-4 mb-10">
                             <img src={coin.image?.small || coin.image?.thumb || coin.image?.large} alt={coin.name} />
                             <div>
                                 <div className="flex place-items-center gap-2">
-                                    <h1 className="text-2xl font-bold text-white">{coin.name}</h1>
-                                    <p className="text-gray-500">{coin.symbol.toUpperCase()}</p>
-                                    <p className="text-gray-500">#{coin.market_cap_rank}</p>
+                                    <h1 className="text-4xl font-bold text-white">{coin.name}</h1>
+                                    <p className="text-gray-500 text-xl bg-[#21262e] rounded py-0.5 px-2">{coin.symbol.toUpperCase()}</p>
+                                    <p className="text-gray-500 bg-[#21262e] rounded py-0.5 px-2">#{coin.market_cap_rank}</p>
                                 </div>
                                 <div className="flex place-items-center gap-2">
-                                    <h2 className="text-xl font-semibold text-white">${coin.market_data.current_price?.usd?.toLocaleString() || "N/A"}</h2>
-                                    <p className="text-gray-500 flex place-items-center gap-1">{coin.market_data.price_change_percentage_24h.toFixed(2) >= 0 ? <HiArrowTrendingUp className="text-green-500" /> : <FaArrowTrendDown className="text-red-500" />}{coin.market_data.price_change_percentage_24h?.toFixed(2) || "N/A"}%</p>
+                                    <h2 className="text-4xl font-semibold text-white">${coin.market_data.current_price?.usd?.toLocaleString() || "N/A"}</h2>
+                                    <p className={`${coin.market_data.price_change_percentage_24h?.toFixed(2) >= 0 ? "text-green-500" : "text-red-500"} flex place-items-center gap-1 bg-[#30181c] px-1 py-0.5 rounded-sm`}>{coin.market_data.price_change_percentage_24h.toFixed(2) >= 0 ? <HiArrowTrendingUp className="text-green-500" /> : <FaArrowTrendDown className="text-red-500" />}{coin.market_data.price_change_percentage_24h?.toFixed(2) || "N/A"}%</p>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            Chart
+                        <div className="mt-4">
+                            <CoinChart coinId={coin.id} />
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
                             <Detail data="Market Cap" value={`$${coin.market_data.market_cap?.usd?.toLocaleString() || "N/A"}`} />

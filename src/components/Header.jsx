@@ -4,7 +4,7 @@ import FilterInput from "./filterInput";
 function Header({ onChange, onchange, filter, onFilterChange }) {
     return (
         <div className="m-3 ">
-            <h1 className="text-xl mb-3 text-white md:text-3xl font-bold">Crypto Dashboard</h1>
+            <h1 className="text-xl mb-5 text-white md:text-3xl font-bold">Crypto Dashboard</h1>
             <div className="flex gap-1 md:gap-3 w-full justify-between">
                 <FilterInput filter={filter} onFilterChange={onFilterChange} />
                 <div className="flex gap-1 md:gap-3">
