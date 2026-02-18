@@ -1,4 +1,4 @@
-import FilterInput from "./filterInput";
+import FilterInput from "./FilterInput";
 
 
 function Header({ onChange, onchange, filter, onFilterChange }) {
