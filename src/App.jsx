@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const fetchCryptoData = async () => {
       try {
-        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
+        const response = await axios.get('/gecko/coins/markets', {
           headers: {
             'x-cg-demo-api-key': import.meta.env.VITE_API_KEY,
             'Accept': 'application/json'

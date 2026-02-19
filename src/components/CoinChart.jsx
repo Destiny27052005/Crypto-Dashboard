@@ -32,7 +32,7 @@ function CoinChart({ coinId }) {
     useEffect(() => {
         const fetchCoinDetails = async () => {
             try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`, {
+                const response = await fetch(`/gecko/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`, {
                     headers: {
                         'x-cg-demo-api-key': import.meta.env.VITE_API_KEY,
                     }
@@ -113,7 +113,7 @@ function CoinChart({ coinId }) {
         },
     }
 
-    if (loading) return <p>Loading chart...</p>;
+    if (loading) return <p className="text-gray-500">Loading chart...</p>;
     return (
         <div className="p-6 rounded-xl border border-gray-800" style={{ height: 'fit-content' }}>
             <div className="flex justify-between place-content-center mb-4">
