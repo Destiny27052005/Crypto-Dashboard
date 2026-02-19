@@ -41,7 +41,7 @@ function App() {
       }
     };
     fetchCryptoData()
-  }, [cryptoData, isPage, isOrder])
+  }, [isPage, isOrder])
 
   const filteredCoins = cryptoData.filter(
     (coin) =>
