@@ -14,34 +14,38 @@ function App() {
   const [filter, setFilter] = useState('');
 
 
-  useEffect(() => {
-    const fetchCryptoData = async () => {
-      try {
-        const response = await axios.get('/gecko/coins/markets', {
-          headers: {
-            'x-cg-demo-api-key': import.meta.env.VITE_API_KEY,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'application/json'
-          },
-          params: {
-            vs_currency: 'usd',
-            order: isOrder,
-            per_page: isPage,
-            page: 1,
-            sparkline: false
-          }
-        });
+ useEffect(() => {
+  const fetchCryptoData = async () => {
+    try {
+      setLoading(true); 
+      const response = await axios.get('/gecko/coins/markets', {
+        headers: {
+          'x-cg-demo-api-key': import.meta.env.VITE_API_KEY,
+          'Accept': 'application/json'
+        },
+        params: {
+          vs_currency: 'usd',
+          order: isOrder,
+          per_page: isPage,
+          page: 1,
+          sparkline: false
+        }
+      });
 
-        setCryptoData(response.data);
-      } catch (err) {
-        setError(err.message);
-      }
-      finally {
-        setLoading(false);
-      }
-    };
-    fetchCryptoData()
-  }, [isPage, isOrder])
+      setCryptoData(response.data);
+      setError(null);
+    } catch (err) {
+      setError(err.response?.status === 403 
+        ? "Access Denied: You might be rate-limited or the API Key is invalid." 
+        : err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchCryptoData();
+  
+}, [isPage, isOrder]);
 
   const filteredCoins = cryptoData.filter(
     (coin) =>
