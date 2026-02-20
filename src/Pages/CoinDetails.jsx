@@ -19,7 +19,7 @@ function CoinDetails() {
     useEffect(() => {
         const fetchCoinDetails = async () => {
             try {
-                const response = await fetch(`/gecko/coins/${id}`, {
+                const response = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`, {
                     headers: {
                         'x-cg-demo-api-key': import.meta.env.VITE_API_KEY,
                     }
